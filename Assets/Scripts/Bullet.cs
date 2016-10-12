@@ -13,7 +13,7 @@ using System.Collections;
 // capabilities I might add to it later. Enjoy!        //
 //                                          – Rayzr :D //
 // --------------------------------------------------- //
-public class Bullet : MonoBehaviour {
+public class Bullet : MonoBehaviour, Projectile {
 
 	// -- PUBLIC VARIABLES -- //
 	public float speed = 5.0f;
@@ -33,11 +33,40 @@ public class Bullet : MonoBehaviour {
 		GetComponent<Rigidbody2D>().velocity = transform.up * speed;
 		StartCoroutine(Routine_Die());
 	}
+
 	IEnumerator Routine_Die() {
 
 		yield return new WaitForSeconds(lifetime);
 		Destroy(gameObject);
 
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Destroy(other.gameObject);
+
+	}
+
+
+
+	void OnTriggerEnter2D(Collider2D other) {
+		OnHit(other.gameObject);
+	}
+
+	// -- PROJECTILE INTERFACE IMPLEMENTATION -- //
+	public void Kill() {
+		Destroy(gameObject);
+	}
+
+	public void OnHit(GameObject other) {
+		if (other.GetComponent<Enemy>() != null) {
+			other.GetComponent<Enemy>().OnHit(this);
+		}
+		Kill();
+	}
+
+	public float GetDamage(Enemy enemy) {
+		// Placeholder, eventually there will be some sort of defense value for the enemy... anyways
+		return 1.0f;
 	}
 
 }
