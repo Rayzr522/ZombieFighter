@@ -21,14 +21,22 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
+		// ------------------------------------------------------ //
+		// Might be confusing, but since Unity is actually 3D,    //
+		// transform.forward would move you on the Z axis.        //
+		// Instead, for "2D" in Unity you use transform.up, as    //
+		// Y is basically forward for my game (pointing upwards), //
+		// so transform.up = forward for all intents and purposes //
+		// in this game. Yay massive comments!                    //
+		//                                             – Rayzr :D //
+		// ------------------------------------------------------ //
 		GetComponent<Rigidbody2D>().velocity = transform.up * speed;
 		StartCoroutine(Routine_Die());
 	}
-
 	IEnumerator Routine_Die() {
 
 		yield return new WaitForSeconds(lifetime);
-		Destroy(this);
+		Destroy(gameObject);
 
 	}
 
