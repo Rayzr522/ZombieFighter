@@ -45,14 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\API\Enemy.cs" />
-     <Compile Include="Assets\Scripts\API\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Bullet.cs" />
-     <Compile Include="Assets\Scripts\CollisionHandler.cs" />
-     <Compile Include="Assets\Scripts\ExtensionMethods.cs" />
+     <Compile Include="Assets\Scripts\API\IEnemy.cs" />
+     <Compile Include="Assets\Scripts\API\IHurtable.cs" />
+     <Compile Include="Assets\Scripts\API\IProjectile.cs" />
+     <Compile Include="Assets\Scripts\Controllers\GunController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\MoveController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\ZombieController.cs" />
      <Compile Include="Assets\Scripts\GM.cs" />
-     <Compile Include="Assets\Scripts\GunController.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Impl\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Utils\ExtensionMethods.cs" />
+     <Compile Include="Assets\Scripts\Utils\Sounds.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />

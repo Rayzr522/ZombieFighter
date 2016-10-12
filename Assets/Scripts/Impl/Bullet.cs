@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using ZombieFighter;
 
 // --------------------------------------------------- //
 // This class is nice as it can be used for any        //
@@ -13,7 +13,7 @@ using System.Collections;
 // capabilities I might add to it later. Enjoy!        //
 //                                          – Rayzr :D //
 // --------------------------------------------------- //
-public class Bullet : MonoBehaviour, Projectile {
+public class Bullet : MonoBehaviour, IProjectile {
 
 	// -- PUBLIC VARIABLES -- //
 	public float speed = 5.0f;
@@ -58,13 +58,13 @@ public class Bullet : MonoBehaviour, Projectile {
 	}
 
 	public void OnHit(GameObject other) {
-		if (other.GetComponent<Enemy>() != null) {
-			other.GetComponent<Enemy>().OnHit(this);
+		if (other.GetComponent<IEnemy>() != null) {
+			other.GetComponent<IEnemy>().OnHit(this);
 		}
 		Kill();
 	}
 
-	public float GetDamage(Enemy enemy) {
+	public float GetDamage(IEnemy enemy) {
 		// Placeholder, eventually there will be some sort of defense value for the enemy... anyways
 		return 1.0f;
 	}
