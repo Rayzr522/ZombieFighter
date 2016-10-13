@@ -3,8 +3,10 @@ using UnityEngine.Internal;
 using System.Collections;
 
 public class GunController : MonoBehaviour {
-	
-	public float reloadTime = 0.3f;
+
+	[Tooltip("How long it takes to be able to shoot again")]
+	public float reloadTime = 0.1f;
+	[Tooltip("The bullet prefab that gets spawned")]
 	public GameObject bulletPrefab;
 
 	private Transform playerPos;
@@ -25,13 +27,9 @@ public class GunController : MonoBehaviour {
 
 		elapsedTime += Time.deltaTime;
 
-		if (Input.GetButtonDown("Fire1")) {
-
-			if (elapsedTime >= reloadTime) {
-				elapsedTime = 0;
-				fire();
-			}
-
+		if (Input.GetButtonDown("Fire1") && elapsedTime >= reloadTime) {
+			elapsedTime = 0;
+			fire();
 		}
 	
 	}

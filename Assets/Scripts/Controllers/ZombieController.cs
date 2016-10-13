@@ -57,7 +57,7 @@ public class ZombieController : MonoBehaviour, IEnemy {
 
 	// IHurtable#Damage(float) impl
 	public void Damage(float amount) {
-		Sounds.Play("Hit", 0.2f);
+		Sounds.Play("Hit", 0.4f);
 		this.health -= amount;
 		if (health <= 0.0f) {
 			Kill();
