@@ -1,14 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/ZombieController.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Controllers/ZombieController.cs" Line="17" Column="30" />
-      <File FileName="Assets/Scripts/Impl/Bullet.cs" Line="3" Column="21" />
-      <File FileName="Assets/Scripts/Controllers/PlayerController.cs" Line="49" Column="35" />
-      <File FileName="Assets/Scripts/API/IProjectile.cs" Line="13" Column="20" />
-      <File FileName="Assets/Scripts/Utils/Sounds.cs" Line="92" Column="97" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Internal;
 using System.Collections;
+using ZombieFighter;
 
 public class GunController : MonoBehaviour {
-
-	[Tooltip("How long it takes to be able to shoot again")]
-	public float reloadTime = 0.1f;
-	[Tooltip("The bullet prefab that gets spawned")]
-	public GameObject bulletPrefab;
+	
+	[Tooltip("The weapon that this represents")]
+	public Weapon weapon;
 
 	private Transform playerPos;
 	private Transform bulletSpawnPoint;
@@ -16,10 +15,19 @@ public class GunController : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 
+		SwitchWeapon(Weapons.GetWeapons()[0]);
+
 		playerPos = transform.GetComponentInParent<Transform>();
 		bulletSpawnPoint = transform.GetChild(0);
-		elapsedTime = reloadTime;
+		elapsedTime = weapon.reloadTime;
 	
+	}
+
+	public void SwitchWeapon(Weapon weapon) {
+
+		this.weapon = weapon;
+		GetComponent<SpriteRenderer>().sprite = Textures.Get(weapon.texture);
+
 	}
 	
 	// Update is called once per frame
@@ -27,7 +35,7 @@ public class GunController : MonoBehaviour {
 
 		elapsedTime += Time.deltaTime;
 
-		if (Input.GetButtonDown("Fire1") && elapsedTime >= reloadTime) {
+		if (Input.GetButtonDown("Fire1") && elapsedTime >= weapon.reloadTime) {
 			elapsedTime = 0;
 			fire();
 		}
@@ -37,7 +45,8 @@ public class GunController : MonoBehaviour {
 	public void fire() {
 
 		// Fire a bullet
-		Instantiate(bulletPrefab, bulletSpawnPoint.position, playerPos.rotation);
+		GameObject go = (GameObject) Instantiate(weapon.projectile, bulletSpawnPoint.position, playerPos.rotation);
+		go.GetComponent<IProjectile>().SetVelocity(weapon.projectileSpeed);
 
 	}
 

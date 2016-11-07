@@ -16,8 +16,18 @@ public class ZombieController : MonoBehaviour, IEnemy {
 	[Tooltip("How close the player must be to get noticed.")]
 	public float attackRange = 8.0f;
 
+	private PlayerController player;
+
 	// Use this for initialization
 	void Start() {
+		if (PlayerController.instance == null) {
+			Debug.Log("What the heck? PlayerController.INSTANCE = null!");
+			Kill();
+			return;
+		}
+		
+		player = PlayerController.instance;
+
 		rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -26,13 +36,6 @@ public class ZombieController : MonoBehaviour, IEnemy {
 
 		rb.velocity = rb.velocity * 0.1f;
 
-		if (PlayerController.INSTANCE == null) {
-			Debug.Log("What the heck? PlayerController.INSTANCE = null!");
-			Kill();
-			return;
-		}
-
-		PlayerController player = PlayerController.INSTANCE;
 
 		Vector2 distance = (player.transform.position - transform.position).To2D();
 		if (distance.magnitude >= attackRange) {

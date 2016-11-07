@@ -16,37 +16,16 @@ using ZombieFighter;
 public class Bullet : MonoBehaviour, IProjectile {
 
 	// -- PUBLIC VARIABLES -- //
-	public float speed = 5.0f;
+	private float velocity = 1.0f;
 	public float lifetime = 3.0f;
 
-	// Use this for initialization
-	void Start() {
-		// ------------------------------------------------------ //
-		// Might be confusing, but since Unity is actually 3D,    //
-		// transform.forward would move you on the Z axis.        //
-		// Instead, for "2D" in Unity you use transform.up, as    //
-		// Y is basically forward for my game (pointing upwards), //
-		// so transform.up = forward for all intents and purposes //
-		// in this game. Yay massive comments!                    //
-		//                                             – Rayzr :D //
-		// ------------------------------------------------------ //
-		GetComponent<Rigidbody2D>().velocity = transform.up * speed;
-		StartCoroutine(Routine_Die());
+	private Rigidbody2D rb;
+
+	void Awake() {
+		rb = GetComponent<Rigidbody2D>();
+		Move(transform.up);
+		Destroy(gameObject, lifetime);
 	}
-
-	IEnumerator Routine_Die() {
-
-		yield return new WaitForSeconds(lifetime);
-		Destroy(gameObject);
-
-	}
-
-	void OnTriggerEnter(Collider other) {
-		Destroy(other.gameObject);
-
-	}
-
-
 
 	void OnTriggerEnter2D(Collider2D other) {
 		OnHit(other.gameObject);
@@ -64,9 +43,24 @@ public class Bullet : MonoBehaviour, IProjectile {
 		Kill();
 	}
 
-	public float GetDamage(IEnemy enemy) {
+	public float GetDamage(IHurtable enemy) {
 		// Placeholder, eventually there will be some sort of defense value for the enemy... anyways
 		return 1.0f;
+	}
+
+	public void Move(Vector2 direction) {
+		direction = direction.normalized;
+		transform.rotation = Quaternion.Euler(0f, 0f, -Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
+		rb.velocity = direction * velocity;
+	}
+
+	public void SetVelocity(float velocity) {
+		this.velocity = velocity;
+		Move(transform.up);
+	}
+
+	public float GetVelocity() {
+		return velocity;
 	}
 
 }

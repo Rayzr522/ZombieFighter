@@ -6,11 +6,7 @@ using ZombieFighter;
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
 
-	private static PlayerController instance;
-
-	public static PlayerController INSTANCE {
-		get { return instance; }
-	}
+	public static PlayerController instance { get; private set; }
 
 	// -- ROTATION / VELOCITY VARIABLES -- //
 	// The last rotation
